@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - components/minor_utils.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">components</a> - minor_utils.c<span style="font-size: 80%;"> (source / <a href="minor_utils.c.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryMed">86.0&nbsp;%</td>
+            <td class="headerCovTableEntry">93</td>
+            <td class="headerCovTableEntry">80</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-01-23 14:45:53</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">94.7&nbsp;%</td>
+            <td class="headerCovTableEntry">19</td>
+            <td class="headerCovTableEntry">18</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #include &quot;../s21_decimal.h&quot;</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span> <span class="tlaGNC tlaBgGNC">         166 : void resetDecimal(s21_decimal *dst) {</span></span>
+<span id="L4"><span class="lineNum">       4</span> <span class="tlaGNC">         166 :   int row = ROW_NUMBER;</span></span>
+<span id="L5"><span class="lineNum">       5</span> <span class="tlaGNC">         830 :   while (row--) dst-&gt;bits[row] = 0;</span></span>
+<span id="L6"><span class="lineNum">       6</span> <span class="tlaGNC">         166 : }</span></span>
+<span id="L7"><span class="lineNum">       7</span>              : </span>
+<span id="L8"><span class="lineNum">       8</span>              : // void nullOutLongDecimal(s21_long_decimal *dst) {</span>
+<span id="L9"><span class="lineNum">       9</span>              : //   int row = LONG_ROW_NUMBER;</span>
+<span id="L10"><span class="lineNum">      10</span>              : //   while (row--) dst-&gt;bits[row] = 0;</span>
+<span id="L11"><span class="lineNum">      11</span>              : // }</span>
+<span id="L12"><span class="lineNum">      12</span>              : </span>
+<span id="L13"><span class="lineNum">      13</span>              : // void negateDecimal(s21_decimal *dst) {</span>
+<span id="L14"><span class="lineNum">      14</span>              : //   int row = ROW_NUMBER;</span>
+<span id="L15"><span class="lineNum">      15</span>              : //   while (row--) dst-&gt;bits[row] = ~dst-&gt;bits[row] + 1;</span>
+<span id="L16"><span class="lineNum">      16</span>              : // }</span>
+<span id="L17"><span class="lineNum">      17</span>              : </span>
+<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">      584970 : bool isSetBit(s21_decimal dst, int index) {</span></span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">      584970 :   return (dst.bits[getRow(index)] &amp; (1 &lt;&lt; getColumn(index)));</span></span>
+<span id="L20"><span class="lineNum">      20</span>              : }</span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">          16 : bool isScaleSet(s21_decimal dst) { return (dst.bits[3] &amp; 0x00FF0000); }</span></span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : // bool isSetLongBit(s21_long_decimal dst, int index) {</span>
+<span id="L24"><span class="lineNum">      24</span>              : //   return (dst.bits[getRow(index)] &amp; (1 &lt;&lt; getColumn(index)));</span>
+<span id="L25"><span class="lineNum">      25</span>              : // }</span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">       18106 : void setBit(s21_decimal *dst, int index) {</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">       18106 :   dst-&gt;bits[getRow(index)] |= (1 &lt;&lt; getColumn(index));</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">       18106 : }</span></span>
+<span id="L30"><span class="lineNum">      30</span>              : </span>
+<span id="L31"><span class="lineNum">      31</span>              : // void setLongBit(s21_long_decimal *dst, int index) {</span>
+<span id="L32"><span class="lineNum">      32</span>              : //   dst-&gt;bits[getRow(index)] |= (1 &lt;&lt; getColumn(index));</span>
+<span id="L33"><span class="lineNum">      33</span>              : // }</span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">          60 : void inverseBit(s21_decimal *dst, int index) {</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">          60 :   dst-&gt;bits[getRow(index)] ^= (1 &lt;&lt; getColumn(index));</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">          60 : }</span></span>
+<span id="L38"><span class="lineNum">      38</span>              : </span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">      119970 : void resetBit(s21_decimal *dst, int index) {</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">      119970 :   dst-&gt;bits[getRow(index)] &amp;= ~((1 &lt;&lt; getColumn(index)));</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">      119970 : }</span></span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span>              : // void resetLongBit(s21_long_decimal *dst, int index) {</span>
+<span id="L44"><span class="lineNum">      44</span>              : //   dst-&gt;bits[getRow(index)] &amp;= ~((1 &lt;&lt; getColumn(index)));</span>
+<span id="L45"><span class="lineNum">      45</span>              : // }</span>
+<span id="L46"><span class="lineNum">      46</span>              : </span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           4 : bool isDecimalZero(s21_decimal num) {</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           4 :   return num.bits[0] == 0 &amp;&amp; num.bits[1] == 0 &amp;&amp; num.bits[2] == 0 &amp;&amp;</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC tlaBgUNC">           0 :          num.bits[3] == 0;</span></span>
+<span id="L50"><span class="lineNum">      50</span>              : }</span>
+<span id="L51"><span class="lineNum">      51</span>              : </span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC tlaBgGNC">        5264 : int getScale(s21_decimal value) {</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">        5264 :   int result = (char)(value.bits[3] &gt;&gt; 16);</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">        5264 :   return result;</span></span>
+<span id="L55"><span class="lineNum">      55</span>              : }</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">         226 : void setScale(s21_decimal *num, int scale) {</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">         226 :   if (isSetBit(*num, MINUS_BIT_INDEX))</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">          16 :     num-&gt;bits[3] = (scale &lt;&lt; 16) | (1 &lt;&lt; getColumn(MINUS_BIT_INDEX));</span></span>
+<span id="L60"><span class="lineNum">      60</span>              :   else</span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">         210 :     num-&gt;bits[3] = (scale &lt;&lt; 16);</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">         226 : }</span></span>
+<span id="L63"><span class="lineNum">      63</span>              : </span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        2514 : bool isCorrectDecimal(s21_decimal *num) {</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">        5022 :   return num != NULL &amp;&amp; getScale(*num) &lt;= 28 &amp;&amp;</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        2508 :          !(num-&gt;bits[3] &amp; (0b01111111000000001111111111111111));</span></span>
+<span id="L67"><span class="lineNum">      67</span>              : }</span>
+<span id="L68"><span class="lineNum">      68</span>              : </span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">        1168 : void alignScale(s21_decimal *value_1, s21_decimal *value_2, int *errorType) {</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">        1168 :   int scale_1 = getScale(*value_1), scale_2 = getScale(*value_2);</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">        1168 :   int scale_diff = scale_1 - scale_2;</span></span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        1168 :   if (scale_diff &gt; 0) {</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">         730 :     while (scale_diff-- &amp;&amp; !(*errorType)) {</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">         560 :       multiplyBy10(value_2, errorType);</span></span>
+<span id="L76"><span class="lineNum">      76</span>              :     }</span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">         998 :   } else if (scale_diff &lt; 0) {</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">         392 :     while (scale_diff++ &amp;&amp; !(*errorType)) {</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">         262 :       multiplyBy10(value_1, errorType);</span></span>
+<span id="L80"><span class="lineNum">      80</span>              :     }</span>
+<span id="L81"><span class="lineNum">      81</span>              :   }</span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">        1168 : }</span></span>
+<span id="L83"><span class="lineNum">      83</span>              : </span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">         822 : void multiplyBy10(s21_decimal *src, int *errorType) {</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">         822 :   s21_decimal temp = *src;</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">         822 :   shift_left(src, 3, errorType);</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">         822 :   shift_left(&amp;temp, 1, errorType);</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">         822 :   addition(*src, temp, src, errorType);</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">         822 : }</span></span>
+<span id="L90"><span class="lineNum">      90</span>              : </span>
+<span id="L91"><span class="lineNum">      91</span>              : /*</span>
+<span id="L92"><span class="lineNum">      92</span>              : number 1:</span>
+<span id="L93"><span class="lineNum">      93</span>              : row\col | 3 | 2 | 1 | 0 |</span>
+<span id="L94"><span class="lineNum">      94</span>              : -------------------------</span>
+<span id="L95"><span class="lineNum">      95</span>              : 0       | 0 | 0 | 0 | 1 |</span>
+<span id="L96"><span class="lineNum">      96</span>              : 1       | 0 | 0 | 0 | 0 |</span>
+<span id="L97"><span class="lineNum">      97</span>              : 2       | 0 | 0 | 0 | 0 |</span>
+<span id="L98"><span class="lineNum">      98</span>              : */</span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">        1960 : void shift_left(s21_decimal *src, int shift, int *errorType) {</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">        5564 :   while (shift--) {</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">        3604 :     if (isSetBit(*src, VALUE_PART_SIZE - 1)) {</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">           4 :       *errorType = NUMBER_TOO_LARGE;</span></span>
+<span id="L103"><span class="lineNum">     103</span>              :     }</span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">      345984 :     for (int bit_index = VALUE_PART_SIZE - 1; bit_index &gt; 0; bit_index--) {</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">      342380 :       if (isSetBit(*src, bit_index - 1)) {</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">       11944 :         setBit(src, bit_index);</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">       11944 :         resetBit(src, bit_index - 1);</span></span>
+<span id="L108"><span class="lineNum">     108</span>              :       }</span>
+<span id="L109"><span class="lineNum">     109</span>              :     }</span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">        3604 :     resetBit(src, 0);</span></span>
+<span id="L111"><span class="lineNum">     111</span>              :   }</span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">        1960 : }</span></span>
+<span id="L113"><span class="lineNum">     113</span>              : </span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">          50 : bool isIntPartBiggerOrEqual(s21_decimal value_1, s21_decimal value_2) {</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">          50 :   bool result = true;</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">          50 :   for (int bit_index = VALUE_PART_SIZE - 1;</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">        3688 :        (bit_index &gt;= 0) &amp;&amp; result &amp;&amp;</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">        3660 :        !(isSetBit(value_1, bit_index) &amp;&amp; !isSetBit(value_2, bit_index));</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">        3638 :        bit_index--) {</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">        3638 :     if (!isSetBit(value_1, bit_index) &amp;&amp; isSetBit(value_2, bit_index))</span></span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">          20 :       result = false;</span></span>
+<span id="L122"><span class="lineNum">     122</span>              :   }</span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">          50 :   return result;</span></span>
+<span id="L124"><span class="lineNum">     124</span>              : }</span>
+<span id="L125"><span class="lineNum">     125</span>              : </span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">          94 : void copySign(s21_decimal value, s21_decimal *result) {</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">          94 :   if (isSetBit(value, MINUS_BIT_INDEX))</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">          36 :     setBit(result, MINUS_BIT_INDEX);</span></span>
+<span id="L129"><span class="lineNum">     129</span>              :   else</span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">          58 :     resetBit(result, MINUS_BIT_INDEX);</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          94 : }</span></span>
+<span id="L132"><span class="lineNum">     132</span>              : </span>
+<span id="L133"><span class="lineNum">     133</span>              : // int determineTheSizeDifference(s21_decimal value_1, s21_decimal value_2) {</span>
+<span id="L134"><span class="lineNum">     134</span>              : //   int bit_index = VALUE_PART_SIZE - 1, difference = 0;</span>
+<span id="L135"><span class="lineNum">     135</span>              : //   while (!isSetBit(value_1, bit_index) &amp;&amp; bit_index &gt;= 0) bit_index--;</span>
+<span id="L136"><span class="lineNum">     136</span>              : //   while (!isSetBit(value_2, bit_index) &amp;&amp; bit_index &gt;= 0)</span>
+<span id="L137"><span class="lineNum">     137</span>              : //     difference++, bit_index--;</span>
+<span id="L138"><span class="lineNum">     138</span>              : //   if (!isIntPartBiggerOrEqual(value_2, value_1)) difference--;</span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span>              : //   return difference;</span>
+<span id="L141"><span class="lineNum">     141</span>              : // }</span>
+<span id="L142"><span class="lineNum">     142</span>              : </span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC tlaBgUNC">           0 : void printDecimal(s21_decimal value) {</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :   for (int i = 0; i &lt; ROW_NUMBER; i++) {</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC">           0 :     printf(&quot; value.bits[%d] = &quot;, i);</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaUNC">           0 :     for (int j = COLUMN_NUMBER - 1; j &gt;= 0; j--) {</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaUNC">           0 :       if (value.bits[i] &amp; (1u &lt;&lt; j)) {</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC">           0 :         printf(&quot;1&quot;);</span></span>
+<span id="L149"><span class="lineNum">     149</span>              :       } else {</span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC">           0 :         printf(&quot;0&quot;);</span></span>
+<span id="L151"><span class="lineNum">     151</span>              :       }</span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaUNC">           0 :       if (j % 8 == 0) printf(&quot; &quot;);</span></span>
+<span id="L153"><span class="lineNum">     153</span>              :     }</span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaUNC">           0 :     printf(&quot;=(%d) = 0x%X\n&quot;, value.bits[i], value.bits[i]);</span></span>
+<span id="L155"><span class="lineNum">     155</span>              :   }</span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L157"><span class="lineNum">     157</span>              : </span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC tlaBgGNC">          20 : int getFloatExp(const float *value) {</span></span>
+<span id="L159"><span class="lineNum">     159</span>              :   fbits tmp;</span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">          20 :   tmp.fl = *value;</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">          20 :   return ((tmp.ui &amp; ~(1u &lt;&lt; 31)) &gt;&gt; 23) - 127;</span></span>
+<span id="L162"><span class="lineNum">     162</span>              : }</span>
+<span id="L163"><span class="lineNum">     163</span>              : </span>
+<span id="L164"><span class="lineNum">     164</span>              : // int getFloatExp(float *value) {</span>
+<span id="L165"><span class="lineNum">     165</span>              : //   int int_value;</span>
+<span id="L166"><span class="lineNum">     166</span>              : //   memcpy(&amp;int_value, &amp;value, sizeof(int_value));</span>
+<span id="L167"><span class="lineNum">     167</span>              : //   return ((int_value &amp; ~(1 &lt;&lt; 31)) &gt;&gt; 23) - 127;</span>
+<span id="L168"><span class="lineNum">     168</span>              : // }</span>
+<span id="L169"><span class="lineNum">     169</span>              : </span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">          84 : s21_decimal *setBitFloat(s21_decimal *value, int pos, int bit) {</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">          84 :   if (pos / 32 &lt; 4 &amp;&amp; bit)</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">          84 :     value-&gt;bits[pos / 32] |= (1 &lt;&lt; (pos % 32));</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC tlaBgUNC">           0 :   else if (pos / 32 &lt; 4 &amp;&amp; !bit)</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaUNC">           0 :     value-&gt;bits[pos / 32] &amp;= ~(1 &lt;&lt; (pos % 32));</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC tlaBgGNC">          84 :   return value;</span></span>
+<span id="L176"><span class="lineNum">     176</span>              : }</span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">           4 : void setNegativeSign(s21_decimal *value, int bit) {</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">           4 :   value-&gt;bits[3] =</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">           4 :       (bit) ? (value-&gt;bits[3] | (1u &lt;&lt; 31)) : (value-&gt;bits[3] &amp; ~(1u &lt;&lt; 31));</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">           4 : }</span></span>
+<span id="L181"><span class="lineNum">     181</span>              : </span>
+<span id="L182"><span class="lineNum">     182</span>              : // void longNormalization(s21_long_decimal *value_1, s21_long_decimal</span>
+<span id="L183"><span class="lineNum">     183</span>              : // *value_2)</span>
+<span id="L184"><span class="lineNum">     184</span>              : // {</span>
+<span id="L185"><span class="lineNum">     185</span>              : //   int scale_1 = big_getScale(*value_1);</span>
+<span id="L186"><span class="lineNum">     186</span>              : //   int scale_2 = big_getScale(*value_2);</span>
+<span id="L187"><span class="lineNum">     187</span>              : </span>
+<span id="L188"><span class="lineNum">     188</span>              : //   if (scale_1 &gt; scale_2) {</span>
+<span id="L189"><span class="lineNum">     189</span>              : //     int scale_diff = scale_1 - scale_2;</span>
+<span id="L190"><span class="lineNum">     190</span>              : //     for (int i = 0; i &lt; scale_diff; i++) {</span>
+<span id="L191"><span class="lineNum">     191</span>              : //       big_multiply_by_ten(value_2);</span>
+<span id="L192"><span class="lineNum">     192</span>              : //     }</span>
+<span id="L193"><span class="lineNum">     193</span>              : //   } else if (scale_2 &gt; scale_1) {</span>
+<span id="L194"><span class="lineNum">     194</span>              : //     int scale_diff = scale_2 - scale_1;</span>
+<span id="L195"><span class="lineNum">     195</span>              : //     for (int i = 0; i &lt; scale_diff; i++) {</span>
+<span id="L196"><span class="lineNum">     196</span>              : //       big_multiply_by_ten(value_1);</span>
+<span id="L197"><span class="lineNum">     197</span>              : //     }</span>
+<span id="L198"><span class="lineNum">     198</span>              : //   }</span>
+<span id="L199"><span class="lineNum">     199</span>              : // }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>
